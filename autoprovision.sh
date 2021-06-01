@@ -20,7 +20,7 @@ time=$(($(date +%s%N)/1000))
 
 echo Reached target: 'Combine lastMAC and time for serial'
 serial=$lastMAC-$time
-echo $serial > /home/pi/serial.var
+echo $serial >> /home/pi/serial.var
 
 # <----------------------------------------- Set Hostname ----------------------------------------->
 
