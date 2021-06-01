@@ -5,10 +5,15 @@
 echo Reached target: 'Get MAC address'
 IFACE=wlan0
 read MAC </sys/class/net/$IFACE/address
+echo $MAC
 
-echo Reached target: 'Grab last 4 from MAC and remove the :'
-lastMAC=$(awk '{ print substr( $MAC, 13 ) }')
+echo Reached target: 'Grab last 4 from MAC and remove the ":"'
+lastMAC=$(echo $MAC | awk '{print substr( $0, 13 ) }')
+echo $lastMAC
+echo 'Removing ":"'
 lastMAC=$(echo $lastMAC | sed 's/://g')
+echo 'Result:'
+echo $lastMAC
 
 echo Reached target: 'Get time in ms'
 time=$(($(date +%s%N)/1000))
