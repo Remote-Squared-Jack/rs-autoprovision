@@ -91,6 +91,5 @@ echo "0 */30 * * * /home/pi/keyF5" >> autoRefresh # Refresh every 30 min
 crontab autoRefresh
 rm autoRefresh
 
-# <----------------------------------------- EOF and reboot ----------------------------------------->
-echo Reached target: 'Reboot'
-sudo reboot
+# <----------------------------------------- EOF ----------------------------------------->
+echo Reached target: 'EOF'
