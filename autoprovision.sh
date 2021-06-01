@@ -70,9 +70,10 @@ sudo echo '# Allow quitting the X server with CTRL-ATL-Backspace for debuging' >
 sudo echo 'setxkbmap -option terminate:ctrl_alt_bksp' >> /etc/xdg/openbox/autostart
 
 # Start Chromium in kiosk mode
-sudo echo "sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'" >> /etc/xdg/openbox/autostart
-sudo echo "sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/'   ~/.config/chromium/Default/Preferences" >> /etc/xdg/openbox/autostart
-sudo echo "chromium-browser --disable-infobars --noerrdialogs --incognito --check-for-update-interval=1 --simulate-critical-update --kiosk 'https://google.com" >> /etc/xdg/openbox/autostart
+
+sudo echo $'sed -i \'s/\"exited_cleanly\":false/\"exited_cleanly\":true/\' ~/.config/chromium/\'Local State\'' >> /etc/xdg/openbox/autostart
+sudo echo $'sed -i \'s/\"exited_cleanly\":false/\"exited_cleanly\":true/; s/\"exit_type\":\"[^\"]\+\"/\"exit_type\":\"Normal\"/\'  ~/.config/chromium/Default/Preferences' >> /etc/xdg/openbox/autostart
+sudo echo $'chromium-browser --disable-infobars --noerrdialogs --incognito --check-for-update-interval=1 --simulate-critical-update --kiosk \'https://google.com\'' >> /etc/xdg/openbox/autostart
 
 echo Reached target: 'Start at boot (xserver)'
 sudo echo '[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor' >> /home/pi/.profile
