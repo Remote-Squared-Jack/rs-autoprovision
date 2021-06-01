@@ -60,23 +60,22 @@ sudo apt-get -y install xdotool
 echo Reached target: 'Remove splash'
 echo 'disable_splash=1' >> /boot/config.txt
 
-echo Reached target: 'Remove screensaver'
+echo Reached target: 'Config xorg and chromium'
 sudo echo '# Disable screen saver / screen blanking / power management' >> /etc/xdg/openbox/autostart
 sudo echo 'xset s off' >> /etc/xdg/openbox/autostart
 sudo echo 'xset s noblank' >> /etc/xdg/openbox/autostart
 sudo echo 'xset -dpms' >> /etc/xdg/openbox/autostart
 
-echo Reached target: 'Allow quitting the X server with CTRL-ATL-Backspace for debuging'
-setxkbmap -option terminate:ctrl_alt_bksp
+sudo echo '# Allow quitting the X server with CTRL-ATL-Backspace for debuging' >> /etc/xdg/openbox/autostart
+sudo echo 'setxkbmap -option terminate:ctrl_alt_bksp' >> /etc/xdg/openbox/autostart
 
-
-echo Reached target: 'Start Chromium in kiosk mode'
-sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
-sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' 	~/.config/chromium/Default/Preferences
-chromium-browser --disable-infobars --noerrdialogs --incognito --check-for-update-interval=1 --simulate-critical-update --kiosk '[https://DAKBOARD-CUSTOM-URL-HERE]'
+# Start Chromium in kiosk mode
+sudo echo 'sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'' >> /etc/xdg/openbox/autostart
+sudo echo 'sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' 	~/.config/chromium/Default/Preferences' >> /etc/xdg/openbox/autostart
+sudo echo 'chromium-browser --disable-infobars --noerrdialogs --incognito --check-for-update-interval=1 --simulate-critical-update --kiosk 'https://google.com' >> /etc/xdg/openbox/autostart
 
 echo Reached target: 'Start at boot (xserver)'
-sudo echo '[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]																		 && startx -- -nocursor' >> /home/pi/.profile
+sudo echo '[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor' >> /home/pi/.profile
 
 echo Reached target: 'Vertical screen'
 sudo echo 'display_rotate=1' >> /boot/config.txt
