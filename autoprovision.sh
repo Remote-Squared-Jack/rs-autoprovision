@@ -87,9 +87,9 @@ sudo echo 'xdotool keydown F5; xdotool keyup F5 &' >> /home/pi/keyF5
 sudo echo 'exit' >> /home/pi/keyF5
 sudo chmod +x /home/pi/keyF5
 sudo chown pi:pi /home/pi/keyF5
-crontab -l > autoRefresh
-echo "0 */30 * * * /home/pi/keyF5" >> autoRefresh # Refresh every 30 min
-crontab autoRefresh
+sudo -u pi crontab -l > autoRefresh
+sudo -u pi echo "0 */30 * * * /home/pi/keyF5" >> autoRefresh # Refresh every 30 min
+sudo -u crontab autoRefresh
 rm autoRefresh
 
 # <----------------------------------------- EOF ----------------------------------------->
