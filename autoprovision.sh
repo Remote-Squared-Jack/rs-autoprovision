@@ -27,6 +27,21 @@ echo $serial > /home/pi/serial.var
 echo Reached target: 'Saves the serial num to hostname file to be set on reboot'
 echo 'r2d$serial' > /etc/hostname
 
+# <----------------------------------------- Network Wait ----------------------------------------->
+
+# Test connectivity to Internet at 10 sec intervals
+ONLINE=1
+while [ $ONLINE -ne 0 ]
+do
+   ping -q -c 1 -w 1 www.google.com >/dev/null 2>&1
+   ONLINE=$?
+   if [ $ONLINE -ne 0 ]
+     then
+       sleep 10
+   fi
+done
+echo Reached target: 'Internet connection'
+
 # <----------------------------------------- Dakboard Requirements ----------------------------------------->
 
 echo Reached target: 'Update repos'
