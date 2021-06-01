@@ -29,6 +29,8 @@ echo 'r2d$serial' > /etc/hostname
 
 # <----------------------------------------- Dakboard Requirements ----------------------------------------->
 
+echo Reached target: 'Update repos'
+sudo apt-get -y update
 echo Reached target: 'Xorg requirements'
 sudo apt-get -y install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox
 
